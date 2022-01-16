@@ -79,6 +79,5 @@ public class HospitalServiceImplementation implements HospitalService
 	public List<Doctor> getDoctors() {
 		return doctorrepo.findAll();
 	}
-	
-	
+
 }

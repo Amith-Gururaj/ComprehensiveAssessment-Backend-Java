@@ -1,4 +1,5 @@
 package amith.comprehensive.backend.repository;
+
 /**
  * 
  *@author Amith G
@@ -16,5 +17,5 @@ public interface DoctorRepository extends JpaRepository<Doctor,Long>
 	public Doctor findByDname(String name);
 
 	public Doctor findByDid(Long did);
-
+	
 }
