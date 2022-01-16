@@ -26,4 +26,10 @@ public interface HospitalService
 
 	public List<Doctor> getDoctors();
 
+	public List<Patient> getPatients();
+
+	public String updatePatientById(Long id, CustomPat pat);
+
+	public String updateDoctorById(Long id, Doctor doc);
+
 }

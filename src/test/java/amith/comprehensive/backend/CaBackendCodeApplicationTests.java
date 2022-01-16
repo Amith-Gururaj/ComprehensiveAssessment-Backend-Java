@@ -122,5 +122,42 @@ class CaBackendCodeApplicationTests {
 		assertEquals(2, service.getAllDoctors().size());
 	}
 	
+	@Test
+	@DisplayName("Get All Patients")
+	public void getAllPatientsTest()
+	{
+		Doctor doc = new Doctor(9L, "Amith", 33, "Male","Surgeon",null);
+		when(patrepository.findAll()).thenReturn(Stream.of(new Patient(9L, "Vishal", doc ,24,"2021/11/23","Migrane") , new Patient(9L, "Vishal", doc ,45,"2021/11/23","Migrane")).collect(Collectors.toList()));
+		assertEquals(2, service.getAllPatients().size());
+	}
 	
+	@Test
+	@DisplayName("Update Patient")
+	public void updatePatientTest() {
+		CustomPat pat = new CustomPat(9L, "Vishal", "Amith" , 25 ,"2021/11/23","Migrane");
+		Long id = 9L;
+		Doctor doc = new Doctor(9L, "Amith", 33, "Male","Surgeon",null);
+		Patient patient = new Patient(pat.getPid(),pat.getPname(),doc,pat.getPage(),pat.getDateofvisit(),pat.getPrescription());
+		when(patrepository.save(patient)).thenReturn(patient);
+		String expected = "";
+		if(patient!=null)
+		{
+			expected = "Patient Details Updated Successfully";
+		}
+		assertEquals(expected, service.updatePatient(id,pat));
+	}
+	
+	@Test
+	@DisplayName("Update Doctor")
+	public void updateDoctorTest() {
+		Doctor doctor = new Doctor(9L, "Amith", 33, "Male","Surgeon",null);
+		Long id = 9L;
+		when(docrepository.save(doctor)).thenReturn(doctor);
+		String expected = "";
+		if(doctor!=null)
+		{
+			expected = "Doctor Details Updated Successfully";
+		}
+		assertEquals(expected, service.updateDoctor(id,doctor));
+	}
 }

@@ -80,4 +80,23 @@ public class HospitalServiceImplementation implements HospitalService
 		return doctorrepo.findAll();
 	}
 
+	@Override
+	public List<Patient> getPatients() {
+		return patientrepo.findAll();
+	}
+
+	@Override
+	public String updatePatientById(Long id, CustomPat pat) {
+		Doctor doc = getPatientDoctor(pat.getDoctorname());
+		Patient patient = new Patient(pat.getPid(),pat.getPname(),doc,pat.getPage(),pat.getDateofvisit(),pat.getPrescription());
+	    patientrepo.save(patient);
+		return "Patient Details Updated Successfully";
+	}
+
+	@Override
+	public String updateDoctorById(Long id, Doctor doc) {
+		doctorrepo.save(doc);
+		return "Doctor Details Updated Successfully";
+	}
+
 }
